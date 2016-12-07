@@ -1,0 +1,31 @@
+<div class="well bs-component">
+  <%= form_for(@award, class: "form-horizontal") do |f| %>
+    <% if @award.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@award.errors.count, "error") %> prohibited this award from being saved:</h2>
+  
+        <ul>
+        <% @award.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="form-group">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description %><br>
+      <%= f.text_area :description %>
+    </div>
+    <div class="form-group">
+      <%= f.label :points_required %><br>
+      <%= f.number_field :points_required %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

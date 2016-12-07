@@ -1,0 +1,38 @@
+<div class="well bs-component" >
+  <%= form_for(@task, class: "form-horizontal") do |f| %>
+    <% if @task.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+  
+        <ul>
+        <% @task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <% if current_user.user_type == "tasker" %>
+      <div class="form-group">
+        <%= f.label :title %><br>
+        <%= f.text_field :title %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description %><br>
+        <%= f.text_area :description %>
+      </div>
+    <% else %>
+      <h4>Task: <%= @task.title.capitalize %></h4>
+      <p><%= @task.description %></p>
+      <div class="form-group">
+        <%= f.radio_button :redeemed, "NotDone", :checked => true %>
+        <%= f.label :redeemed, "Not Done" %>
+        <%= f.radio_button :redeemed, "Done" %>
+        <%= f.label :redeemed, "Done" %>
+      </div>
+    <% end %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

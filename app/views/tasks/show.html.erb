@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+  | <%= @task.title %> | <small>Created At: <%= @task.created_at.to_formatted_s(:long_ordinal) %> </small>
+</h2>
+
+<div class="well bs-component" %>
+  <p>
+    <strong><% if @task.redeemed %>Completed on<% else %>Not completed yet<% end %></strong>
+  </p>
+  <hr>
+  <h3><strong>Details:</strong></h3>
+  <p> 
+    <%= @task.description %>
+  </p>
+  
+
+
+</div>
+<h3>Due Dates</h3>
+<div class="well">
+
+  <% if @task_dates %>
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Due Date</th>
+        <th>Points</th>
+        <th collspan="3">Details</th>
+      </tr>
+      <% @task_dates.each do |task_date| %>
+        <tr>
+          <td><%= task_date.due_date.to_formatted_s(:long_ordinal) %></td>
+          <td><%= task_date.point_value %></td>
+          <td><%= task_date.description %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+</div>
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>
